@@ -15,10 +15,11 @@ const create = async (req, res) => {
     });
   }
 };
+// eslint-disable-next-line consistent-return
 const list = async (req, res) => {
   try {
     const users = await User.find().select('name email updatedAt createdAt');
-    return res.json(users);
+    res.json(users);
   } catch (err) {
     return res.status(400).json({
       error: errorHandler.getErrorMessage(err),
@@ -42,11 +43,13 @@ const userByID = async (req, res, next, id) => {
     });
   }
 };
+
 const read = (req, res) => {
   req.profile.hashed_password = undefined;
   req.profile.salt = undefined;
   return res.json(req.profile);
 };
+// eslint-disable-next-line consistent-return
 const update = async (req, res) => {
   try {
     let user = req.profile;
@@ -55,20 +58,21 @@ const update = async (req, res) => {
     await user.save();
     user.hashed_password = undefined;
     user.salt = undefined;
-    return res.json(user);
+    res.json(user);
   } catch (err) {
     return res.status(400).json({
       error: errorHandler.getErrorMessage(err),
     });
   }
 };
+// eslint-disable-next-line consistent-return
 const remove = async (req, res) => {
   try {
     const user = req.profile;
     const deletedUser = await user.remove();
     deletedUser.hashed_password = undefined;
     deletedUser.salt = undefined;
-    return res.json(deletedUser);
+    res.json(deletedUser);
   } catch (err) {
     return res.status(400).json({
       error: errorHandler.getErrorMessage(err),

@@ -44,6 +44,7 @@ const requireSignin = expressJwt({
   algorithms: ['HS256'],
 });
 
+// eslint-disable-next-line consistent-return
 const hasAuthorization = (req, res, next) => {
   const authorized = req.profile && req.auth && req.profile._id === req.auth._id;
   if (!(authorized)) {
@@ -51,7 +52,7 @@ const hasAuthorization = (req, res, next) => {
       error: 'User is not authorized',
     });
   }
-  return next();
+  next();
 };
 
 export default {
