@@ -1,5 +1,4 @@
 /server/node_modules
 /server/.env
-/server/package-lock.json
 node_modules
 /server/dist

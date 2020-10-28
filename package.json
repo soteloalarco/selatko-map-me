@@ -4,11 +4,15 @@
   "description": "Web Application with social media traits for logging visits in a map and sharing them with friends.",
   "main": "index.js",
   "scripts": {
-    "install": "cd server && npm install && npm run build && cd .. && cd client &&  yarn install && yarn build",
+    "install": "cd server && npm install && npm run build && cd .. && cd client &&  npm install && npm run build",
     "client": "node scripts/start-client.js",
     "server": "cd server && npm run start",
     "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
     "build": "node scripts/build.js"
+  },
+  "engines": {
+    "node": "10.x",
+    "npm": "6.x"
   },
   "repository": {
     "type": "git",
