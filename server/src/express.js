@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import express from 'express';
 import morgan from 'morgan';
 import helmet from 'helmet';
@@ -8,7 +9,7 @@ import compress from 'compression';
 import userRoutes from './routes/user.routes';
 import authRoutes from './routes/auth.routes';
 
-require('dotenv');
+require('dotenv').config();
 
 const app = express();
 
@@ -19,7 +20,7 @@ app.use(compress());
 app.use(morgan('common'));
 app.use(helmet());
 app.use(cors({
-  origin: process.env.CORS_ORIGIN,
+  origin: process.env.CORS_ORIGIN || 'http://localhost:3000',
 }));
 
 app.use('/', userRoutes);
