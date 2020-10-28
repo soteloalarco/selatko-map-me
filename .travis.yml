@@ -7,5 +7,4 @@ script:
   - echo 'Installing Dependencies'
   - npm install
   - echo 'Running tests'
-  - npm run dev
   - mocha
