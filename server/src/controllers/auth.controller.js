@@ -14,7 +14,7 @@ const signin = async (req, res) => {
       return res.status('401').send({ error: "Email and password don't match." });
     }
 
-    const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
+    const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET || 'secret_key');
 
     res.cookie('t', token, { expire: new Date() + 9999 });
 
@@ -39,7 +39,7 @@ const signout = (req, res) => {
 };
 
 const requireSignin = expressJwt({
-  secret: process.env.JWT_SECRET,
+  secret: process.env.JWT_SECRET || 'secret_key',
   userProperty: 'auth',
   algorithms: ['HS256'],
 });

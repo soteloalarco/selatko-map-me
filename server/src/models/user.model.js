@@ -1,3 +1,4 @@
+/* eslint-disable func-names */
 import mongoose from 'mongoose';
 import crypto from 'crypto';
 import MapEntrySchema from './mapEntry.model';
