@@ -24,12 +24,6 @@ app.use(cors());
 app.use('/', userRoutes);
 app.use('/', authRoutes);
 
-app.get('/', (req, res) => {
-  res.json({
-    message: 'Hello World! 🌎',
-  });
-});
-
 // Catch unauthorized errors
 
 // eslint-disable-next-line no-unused-vars

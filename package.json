@@ -4,13 +4,13 @@
   "description": "Web Application with social media traits for logging visits in a map and sharing them with friends.",
   "main": "index.js",
   "scripts": {
-    "install": "cd server && npm install && npm run build",
+    "install": "cd client && npm install && npm run build && cd ../server && npm install && npm run build",
     "client": "node scripts/start-client.js",
     "server": "cd server && npm run start",
     "start-dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
-    "build": "node scripts/build.js",
+    "build-dev": "node scripts/build.js",
     "heroku-postbuild-2": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
-    "heroku-postbuild": "cd client && npm install && npm run build",
+    "heroku-postbuild-3": "cd client && npm install && npm run build",
     "start": "npm run server"
   },
   "engines": {
