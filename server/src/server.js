@@ -1,4 +1,6 @@
 /* eslint-disable no-console */
+import express from 'express';
+import path from 'path';
 import mongoose from 'mongoose';
 import app from './express';
 
@@ -15,6 +17,16 @@ mongoose.connect(process.env.DATABASE_URL || 'mongodb://localhost:27017/selatko-
 mongoose.connection.on('error', () => {
   throw new Error(`Unable to connect to database: ${process.env.DATABASE_URL || 'mongodb://localhost:27017/selatko-map-me'}`);
 });
+
+if (process.env.NODE_ENV === 'production') {
+  // Serve any static files
+  app.use(express.static(path.join(__dirname, '../../client/build')));
+
+  // Handle React routing, return all requests to React app
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../../client/build'));
+  });
+}
 
 app.listen(process.env.PORT || 1337, (err) => {
   if (err) {
