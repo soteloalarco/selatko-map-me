@@ -9,9 +9,9 @@
     "server": "cd server && npm run start",
     "start-dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
     "build": "node scripts/build.js",
-    "start": "node server/dist/server.js",
     "heroku-postbuild-2": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
-    "heroku-postbuild-3": "cd client && npm install && npm run build"
+    "heroku-postbuild": "cd client && npm install && npm run build",
+    "start": "npm run server"
   },
   "engines": {
     "node": "10.x",
