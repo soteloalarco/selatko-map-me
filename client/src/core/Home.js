@@ -5,7 +5,6 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
-import { Link } from 'react-router-dom';
 import wherethewatertasteslikewine from '../assets/images/wolf-stories.png';
 
 const useStyles = makeStyles((theme) => ({
@@ -37,8 +36,7 @@ export default function Home() {
       />
       <CardContent>
         <Typography variant="body2" component="p">
-          Welcome to the home page for map-me.
-          <Link to="/users">Users</Link>
+          Image obtained from videogame Where The Water Tastes Like Wine.
         </Typography>
       </CardContent>
     </Card>

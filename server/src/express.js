@@ -19,18 +19,10 @@ app.use(cookieParser());
 app.use(compress());
 app.use(morgan('common'));
 app.use(helmet());
-app.use(cors({
-  origin: process.env.CORS_ORIGIN || 'http://localhost:3000',
-}));
+app.use(cors());
 
 app.use('/', userRoutes);
 app.use('/', authRoutes);
-
-app.get('/', (req, res) => {
-  res.json({
-    message: 'Hello World! 🌎',
-  });
-});
 
 // Catch unauthorized errors
 
