@@ -49,13 +49,13 @@ export default function Home() {
         height="60vh"
         mapStyle="mapbox://styles/soteloalarco/ckgfu81286ioh19pgv8isi8w0"
         ReactMapGL
-        mapboxApiAccessToken={process.env.MAP_BOX_TOKEN}
+        mapboxApiAccessToken="pk.eyJ1Ijoic290ZWxvYWxhcmNvIiwiYSI6ImNrZ2ZzZHp6OTByNnkydm1pZ3Q2MG4xczcifQ.VNQ50Dl7d1Aqe-Ne_W8w8Q"
         onViewportChange={(nextViewport) => setViewport(nextViewport)}
       />
       <CardContent>
         <Typography variant="body2" component="p">
           Created by Rolando Sotelo,
-          <Link href="https://soteloalarco.github.io/"> Contact Me.</Link>
+<Link href="https://soteloalarco.github.io/"> Contact Me.</Link>
         </Typography>
       </CardContent>
     </Card>
