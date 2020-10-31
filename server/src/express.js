@@ -27,10 +27,11 @@ app.use('/', authRoutes);
 
 app.use(expressCspHeader({
   directives: {
-    'default-src': [SELF, 'https://api.mapbox.com', 'https:'],
+    'default-src': [SELF, 'https://api.mapbox.com', INLINE],
     'script-src': [SELF, INLINE, 'https://api.mapbox.com'],
     'worker-src': ['blob:'],
-    'img-src': [SELF, 'data:'],
+    'child-src': ['blob:'],
+    'img-src': [SELF, 'data:', 'blob:'],
   },
 }));
 
