@@ -25,6 +25,7 @@ app.use(cors());
 app.use('/', userRoutes);
 app.use('/', authRoutes);
 
+// Content Security Policy in HTTP Header
 app.use(expressCspHeader({
   directives: {
     'default-src': [SELF, 'https://api.mapbox.com', INLINE],
