@@ -6,6 +6,7 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import compress from 'compression';
+import { expressCspHeader, INLINE, SELF } from 'express-csp-header';
 import userRoutes from './routes/user.routes';
 import authRoutes from './routes/auth.routes';
 
@@ -23,6 +24,14 @@ app.use(cors());
 
 app.use('/', userRoutes);
 app.use('/', authRoutes);
+
+app.use(expressCspHeader({
+  directives: {
+    'default-src': [SELF, 'https://api.mapbox.com', 'https:'],
+    'script-src': [SELF, INLINE, 'https://api.mapbox.com'],
+    'worker-src': ['blob:'],
+  },
+}));
 
 // Catch unauthorized errors
 
