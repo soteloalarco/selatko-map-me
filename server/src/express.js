@@ -30,6 +30,7 @@ app.use(expressCspHeader({
     'default-src': [SELF, 'https://api.mapbox.com', 'https:'],
     'script-src': [SELF, INLINE, 'https://api.mapbox.com'],
     'worker-src': ['blob:'],
+    'img-src': [SELF, 'data:'],
   },
 }));
 
