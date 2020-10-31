@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: ; 
+    img-src 'self' data:; script-src 'self' 'unsafe-inline' 'unsafe-eval' blob: *; 
+    style-src  'self' 'unsafe-inline' *">
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
@@ -10,9 +13,6 @@
       name="description"
       content="Selatko-Map-Me Web Application"
     />
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: ; 
-    img-src 'self' data:; script-src 'self' 'unsafe-inline' 'unsafe-eval' blob: *; 
-    style-src  'self' 'unsafe-inline' *">
     <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
