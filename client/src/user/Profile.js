@@ -17,7 +17,6 @@ import Typography from '@material-ui/core/Typography';
 import CardContent from '@material-ui/core/CardContent';
 import Edit from '@material-ui/icons/Edit';
 import Grid from '@material-ui/core/Grid';
-import Person from '@material-ui/icons/Person';
 import Divider from '@material-ui/core/Divider';
 import { Redirect, Link } from 'react-router-dom';
 import Card from '@material-ui/core/Card';
@@ -36,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
   }),
   title: {
     marginLeft: theme.spacing(1),
+    paddingTop: theme.spacing(1),
     color: theme.palette.protectedTitle,
   },
   card: {
@@ -50,6 +50,7 @@ const useStyles = makeStyles((theme) => ({
   profilepaper: {
     minWidth: 350,
     margin: 'auto',
+    backgroundColor: '#EEDA9A',
   },
   visitpaper: {
     minWidth: 350,
@@ -108,7 +109,7 @@ export default function Profile({ match }) {
                 <ListItem>
                   <ListItemAvatar>
                     <Avatar>
-                      <Person />
+                      {user.name ? user.name.charAt(0) : ':)'}
                     </Avatar>
                   </ListItemAvatar>
                   <ListItemText primary={user.name} secondary={user.email} />
