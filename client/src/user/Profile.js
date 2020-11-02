@@ -28,7 +28,7 @@ import { read } from './api-user';
 
 const useStyles = makeStyles((theme) => ({
   root: theme.mixins.gutters({
-    maxWidth: 1200,
+    maxWidth: 1290,
     margin: 'auto',
     padding: theme.spacing(1),
     marginTop: theme.spacing(1),
@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.protectedTitle,
   },
   card: {
-    maxWidth: 700,
+    maxWidth: 800,
     margin: 'auto',
     backgroundColor: '#EEDA9A',
   },
@@ -48,11 +48,15 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.openTitle,
   },
   profilepaper: {
-    width: 350,
+    minWidth: 350,
+    margin: 'auto',
+  },
+  visitpaper: {
+    minWidth: 350,
     margin: 'auto',
   },
   profileitem: {
-    maxWidth: 400,
+    maxWidth: 500,
     margin: 'auto',
   },
 }));
@@ -92,21 +96,23 @@ export default function Profile({ match }) {
   }
 
   return (
-    <Grid container justify="center" spacing={3} className={classes.root}>
+    <Grid container justify="space-between" direction="row" spacing={1} className={classes.root}>
       <Grid item className={classes.profileitem} key={0}>
-        <Paper className={classes.profilepaper} elevation={4}>
-          <Typography variant="h6" className={classes.title}>
-            Profile
-          </Typography>
-          <List dense>
-            <ListItem>
-              <ListItemAvatar>
-                <Avatar>
-                  <Person />
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText primary={user.name} secondary={user.email} />
-              { auth.isAuthenticated().user && auth.isAuthenticated().user._id === user._id
+        <Grid container justify="space-between" direction="column" spacing={1}>
+          <Grid item key={0}>
+            <Paper className={classes.profilepaper} elevation={4}>
+              <Typography variant="h6" className={classes.title}>
+                Profile
+              </Typography>
+              <List dense>
+                <ListItem>
+                  <ListItemAvatar>
+                    <Avatar>
+                      <Person />
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText primary={user.name} secondary={user.email} />
+                  { auth.isAuthenticated().user && auth.isAuthenticated().user._id === user._id
     && (
     <ListItemSecondaryAction>
       <Link to={`/user/edit/${user._id}`}>
@@ -117,18 +123,27 @@ export default function Profile({ match }) {
       <DeleteUser userId={user._id} />
     </ListItemSecondaryAction>
     )}
-            </ListItem>
-            <Divider />
-            <ListItem>
-              <ListItemText primary={`Joined: ${(
-                new Date(user.createdAt)).toDateString()}`}
-              />
-            </ListItem>
-            <ListItem>
-              <ListItemText primary={`About Me: ${user.aboutMe}`} />
-            </ListItem>
-          </List>
-        </Paper>
+                </ListItem>
+                <Divider />
+                <ListItem>
+                  <ListItemText primary={`Joined: ${(
+                    new Date(user.createdAt)).toDateString()}`}
+                  />
+                </ListItem>
+                <ListItem>
+                  <ListItemText primary={`About Me: ${user.aboutMe}`} />
+                </ListItem>
+              </List>
+            </Paper>
+          </Grid>
+          <Grid item key={1}>
+            <Paper className={classes.visitpaper} elevation={4}>
+              <Typography variant="h6" className={classes.title}>
+                Visit
+              </Typography>
+            </Paper>
+          </Grid>
+        </Grid>
       </Grid>
       <Grid item key={1}>
         <Card className={classes.card}>
