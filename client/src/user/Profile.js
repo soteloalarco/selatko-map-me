@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
     margin: 'auto',
   },
   profileitem: {
-    maxWidth: 500,
+    maxWidth: 400,
     margin: 'auto',
   },
 }));
@@ -139,7 +139,7 @@ export default function Profile({ match }) {
           <Grid item key={1}>
             <Paper className={classes.visitpaper} elevation={4}>
               <Typography variant="h6" className={classes.title}>
-                Visit
+                Visit Info
               </Typography>
             </Paper>
           </Grid>
@@ -148,7 +148,9 @@ export default function Profile({ match }) {
       <Grid item key={1}>
         <Card className={classes.card}>
           <Typography className={classes.titlemap}>
-            <i> Not All Those Who Wonder Are Lost </i>
+            <i>&quot;Not All Those Who Wonder Are Lost&quot;</i>
+            {' '}
+            J. R. R. Tolkien
           </Typography>
 
           <ReactMapGL

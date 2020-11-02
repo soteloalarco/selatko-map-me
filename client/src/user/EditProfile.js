@@ -69,7 +69,7 @@ export default function EditProfile({ match }) {
 
   useEffect(() => {
     const abortController = new AbortController();
-    const { signal } = abortController;
+    const { signal } = abortController.signal;
 
     read({
       userId: match.params.userId,

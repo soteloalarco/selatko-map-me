@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 import extend from 'lodash/extend';
 import User from '../models/user.model';
 import errorHandler from '../helpers/dbErrorHandler';
@@ -36,7 +37,7 @@ const userByID = async (req, res, next, id) => {
       });
     }
     req.profile = user;
-    return next();
+    next();
   } catch (err) {
     return res.status('400').json({
       error: 'Could not retrieve user',
