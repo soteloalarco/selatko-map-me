@@ -20,10 +20,11 @@ import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
 import { Redirect, Link } from 'react-router-dom';
 import Card from '@material-ui/core/Card';
-import ReactMapGL from 'react-map-gl';
+import ReactMapGL, { Marker, Popup } from 'react-map-gl';
 import DeleteUser from './DeleteUser';
 import auth from '../auth/auth-helper';
 import { read } from './api-user';
+import MapEntryForm from '../map/MapEntryForm';
 
 const useStyles = makeStyles((theme) => ({
   root: theme.mixins.gutters({
@@ -66,6 +67,7 @@ export default function Profile({ match }) {
   const classes = useStyles();
   const [user, setUser] = useState({});
   const [redirectToSignin, setRedirectToSignin] = useState(false);
+  const [addEntryLocation, setAddEntryLocation] = useState(null);
   const [viewport, setViewport] = useState({
     latitude: 23.50,
     longitude: -89.87,
@@ -95,6 +97,14 @@ export default function Profile({ match }) {
   if (redirectToSignin) {
     return <Redirect to="/signin" />;
   }
+
+  const showAddMarkerPopup = (event) => {
+    const [longitude, latitude] = event.lngLat;
+    setAddEntryLocation({
+      latitude,
+      longitude,
+    });
+  };
 
   return (
     <Grid container justify="space-between" direction="row" spacing={1} className={classes.root}>
@@ -149,7 +159,7 @@ export default function Profile({ match }) {
       <Grid item key={1}>
         <Card className={classes.card}>
           <Typography className={classes.titlemap}>
-            <i>&quot;Not All Those Who Wonder Are Lost&quot;</i>
+            <i>&quot;Not All Those Who Wander Are Lost&quot;</i>
             {' '}
             J. R. R. Tolkien
           </Typography>
@@ -162,7 +172,52 @@ export default function Profile({ match }) {
             ReactMapGL
             mapboxApiAccessToken="pk.eyJ1Ijoic290ZWxvYWxhcmNvIiwiYSI6ImNrZ2ZzZHp6OTByNnkydm1pZ3Q2MG4xczcifQ.VNQ50Dl7d1Aqe-Ne_W8w8Q"
             onViewportChange={(nextViewport) => setViewport(nextViewport)}
-          />
+            onDblClick={showAddMarkerPopup}
+          >
+            {
+        addEntryLocation ? (
+          <>
+            <Marker
+              latitude={addEntryLocation.latitude}
+              longitude={addEntryLocation.longitude}
+            >
+
+              <div>
+                <img
+                  src="https://i.imgur.com/y0G5YTX.png"
+                  alt="marker"
+                  className="marker"
+                  style={{
+                    height: `${6 * viewport.zoom}px`,
+                    width: `${6 * viewport.zoom}px`,
+                  }}
+                />
+              </div>
+            </Marker>
+            <Popup
+              latitude={addEntryLocation.latitude}
+              longitude={addEntryLocation.longitude}
+              closeButton
+              closeOnClick={false}
+              dynamicPosition
+              sortByDepth
+              onClose={() => setAddEntryLocation(null)}
+              anchor="top"
+            >
+              <div className="popup">
+                <MapEntryForm
+                  onClose={() => {
+                    setAddEntryLocation(null);
+                  }}
+                  location={addEntryLocation}
+                  createdBy={user.email}
+                />
+              </div>
+            </Popup>
+          </>
+        ) : null
+      }
+          </ReactMapGL>
           <CardContent>
             <Typography variant="body2" component="p">
               Created by Rolando Sotelo,
