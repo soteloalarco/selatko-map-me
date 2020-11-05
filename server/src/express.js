@@ -9,6 +9,7 @@ import compress from 'compression';
 import { expressCspHeader, INLINE, SELF } from 'express-csp-header';
 import userRoutes from './routes/user.routes';
 import authRoutes from './routes/auth.routes';
+import entryRoutes from './routes/entry.routes';
 
 require('dotenv').config();
 
@@ -24,6 +25,7 @@ app.use(cors());
 
 app.use('/', userRoutes);
 app.use('/', authRoutes);
+app.use('/', entryRoutes);
 
 // Content Security Policy in HTTP Header
 app.use(expressCspHeader({

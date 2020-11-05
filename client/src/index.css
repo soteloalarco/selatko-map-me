@@ -11,3 +11,29 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.marker {
+  transform: translate(-50%, -100%);
+}
+
+.popup {
+  width: 18vw;
+  padding: 1rem;
+}
+
+.popup img{
+  height: 180px;
+  width: auto;
+  max-width: 20vw;
+}
+
+.entry-form label, .entry-form input, .entry-form textarea {
+  margin: 0.03rem 0;
+  width: 100%;
+  font-size: small;
+
+}
+
+.error {
+  color: red;
+}

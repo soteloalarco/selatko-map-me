@@ -37,18 +37,3 @@
   }
   
 }
-
-.marker {
-  transform: translate(-50%, -100%);
-}
-
-.popup {
-  width: 20vw;
-  padding: 1rem;
-}
-
-.popup img{
-  height: 180px;
-  width: auto;
-  max-width: 20vw;
-}
