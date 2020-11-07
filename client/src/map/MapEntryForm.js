@@ -20,11 +20,9 @@ const MapEntryForm = ({ createdBy, location, onClose }) => {
       data.longitude = location.longitude;
       data.createdBy = createdBy;
       data.apearingAt = createdBy;
-      const created = await createMapEntry(data);
-      console.log(created);
+      await createMapEntry(data);
       onClose();
     } catch (error) {
-      console.error(error);
       setError(error.message);
       setLoading(false);
     }
