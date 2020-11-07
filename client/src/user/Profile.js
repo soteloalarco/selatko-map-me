@@ -15,6 +15,7 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
+import CardMedia from '@material-ui/core/CardMedia';
 import SvgIcon from '@material-ui/core/SvgIcon';
 import Typography from '@material-ui/core/Typography';
 import CardContent from '@material-ui/core/CardContent';
@@ -28,6 +29,7 @@ import DeleteUser from './DeleteUser';
 import auth from '../auth/auth-helper';
 import { read } from './api-user';
 import MapEntryForm from '../map/MapEntryForm';
+import selatkoImg from '../assets/images/pluto-109.png';
 
 const useStyles = makeStyles((theme) => ({
   root: theme.mixins.gutters({
@@ -64,6 +66,9 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 400,
     margin: 'auto',
   },
+  media: {
+    minHeight: 200,
+  },
 }));
 
 export default function Profile({ match }) {
@@ -79,7 +84,7 @@ export default function Profile({ match }) {
   });
   const jwt = auth.isAuthenticated();
 
-  useEffect(() => {
+  const getUser = async () => {
     const abortController = new AbortController();
     const { signal } = abortController;
 
@@ -96,6 +101,10 @@ export default function Profile({ match }) {
     return function cleanup() {
       abortController.abort();
     };
+  };
+
+  useEffect(() => {
+    getUser();
   }, [match.params.userId]);
 
   if (redirectToSignin) {
@@ -123,7 +132,7 @@ export default function Profile({ match }) {
                 <ListItem>
                   <ListItemAvatar>
                     <Avatar>
-                      {user.name ? user.name.charAt(0) : ':)'}
+                      {user.name && user.name.charAt(0)}
                     </Avatar>
                   </ListItemAvatar>
                   <ListItemText primary={user.name} secondary={user.email} />
@@ -152,25 +161,36 @@ export default function Profile({ match }) {
             </Paper>
           </Grid>
           <Grid item key={1}>
-            <Paper className={classes.visitpaper} elevation={4}>
-              <Typography variant="h6" className={classes.title}>
-                Visit Info
-              </Typography>
-              <Divider />
-              <List dense>
-                <ListItem>
-                  <ListItemText primary={`Title: ${showInfo ? showInfo.title : null}`} />
-                </ListItem>
-                <ListItem>
-                  <ListItemText primary={`Description: ${showInfo ? showInfo.description : null}`} />
-                </ListItem>
-                <ListItem>
-                  <ListItemText primary={`Visited on: ${showInfo ? (
-                    new Date(showInfo.visitedAt)).toDateString() : null}`}
-                  />
-                </ListItem>
-              </List>
-            </Paper>
+            {!(showInfo.title === undefined)
+              ? (
+                <Paper className={classes.visitpaper} elevation={4}>
+                  <Typography variant="h6" className={classes.title}>
+                    Visit Info :
+                  </Typography>
+                  <Divider />
+                  <List dense>
+                    <ListItem>
+                      <ListItemText primary={`Title: ${showInfo.title}`} />
+                    </ListItem>
+                    <ListItem>
+                      <ListItemText primary={`Description: ${showInfo.description}`} />
+                    </ListItem>
+                    <ListItem>
+                      <ListItemText primary={`Visited on: ${(
+                        new Date(showInfo.visitedAt)).toDateString()}`}
+                      />
+                    </ListItem>
+                  </List>
+                </Paper>
+              )
+              : (
+                <Card className={classes.card}>
+                  <Typography variant="h6" className={classes.title}>
+                    Visit Info: Pick a Corn to see its Info.
+                  </Typography>
+                  <CardMedia className={classes.media} image={selatkoImg} title="Selatko" />
+                </Card>
+              )}
           </Grid>
         </Grid>
       </Grid>
@@ -280,6 +300,7 @@ export default function Profile({ match }) {
                 <MapEntryForm
                   onClose={() => {
                     setAddEntryLocation(null);
+                    getUser();
                   }}
                   location={addEntryLocation}
                   createdBy={user.email}
