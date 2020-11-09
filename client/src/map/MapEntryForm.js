@@ -6,7 +6,7 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import createMapEntry from './api-mapEntry';
+import { create } from './api-mapEntry';
 
 const MapEntryForm = ({ createdBy, location, onClose }) => {
   const [loading, setLoading] = useState(false);
@@ -20,7 +20,7 @@ const MapEntryForm = ({ createdBy, location, onClose }) => {
       data.longitude = location.longitude;
       data.createdBy = createdBy;
       data.apearingAt = createdBy;
-      await createMapEntry(data);
+      await create(data);
       onClose();
     } catch (error) {
       setError(error.message);
