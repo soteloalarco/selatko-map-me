@@ -323,6 +323,23 @@ export default function Profile({ match }) {
           </>
         ) : null
       }
+            {!(showInfo.image === undefined)
+              ? (
+                <Popup
+                  latitude={showInfo.latitude}
+                  longitude={showInfo.longitude}
+                  closeButton
+                  closeOnClick={false}
+                  dynamicPosition
+                  sortByDepth
+                  onClose={() => setShowInfo({})}
+                  anchor="top"
+                >
+                  <div className="popup">
+                    <img src={showInfo.image} alt={showInfo.title} />
+                  </div>
+                </Popup>
+              ) : null }
           </ReactMapGL>
           <CardContent>
             <Typography variant="body2" component="p">
