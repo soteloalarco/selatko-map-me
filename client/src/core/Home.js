@@ -2,13 +2,14 @@
 /* eslint-disable max-len */
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/jsx-filename-extension */
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import ReactMapGL from 'react-map-gl';
+import CardMedia from '@material-ui/core/CardMedia';
 import Link from '@material-ui/core/Link';
+import selatkoPortada from '../assets/images/portada-s.png';
 
 require('dotenv').config();
 
@@ -24,18 +25,12 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.openTitle,
   },
   media: {
-    minHeight: 500,
+    minHeight: 380,
   },
 }));
 
 export default function Home() {
   const classes = useStyles();
-
-  const [viewport, setViewport] = useState({
-    latitude: 23.50,
-    longitude: -89.87,
-    zoom: 3.9,
-  });
 
   return (
     <Card className={classes.card}>
@@ -43,15 +38,7 @@ export default function Home() {
         <i> &quot;All the stories and songs and myths and legends start somewhere... with a seed. As they&apos;re told and re-told and passed around, they grow and change to become the stories we know&quot; </i>
         (WTWTLW).
       </Typography>
-      <ReactMapGL
-        {...viewport}
-        width="100vw"
-        height="60vh"
-        mapStyle="mapbox://styles/soteloalarco/ckgfu81286ioh19pgv8isi8w0"
-        ReactMapGL
-        mapboxApiAccessToken="pk.eyJ1Ijoic290ZWxvYWxhcmNvIiwiYSI6ImNrZ2ZzZHp6OTByNnkydm1pZ3Q2MG4xczcifQ.VNQ50Dl7d1Aqe-Ne_W8w8Q"
-        onViewportChange={(nextViewport) => setViewport(nextViewport)}
-      />
+      <CardMedia className={classes.media} image={selatkoPortada} title="Selatko Map-Me" />
       <CardContent>
         <Typography variant="body2" component="p">
           Created by Rolando Sotelo,
