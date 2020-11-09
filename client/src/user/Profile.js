@@ -199,7 +199,7 @@ export default function Profile({ match }) {
               : (
                 <Card className={classes.card}>
                   <Typography variant="h6" className={classes.title}>
-                    Visit Info: Pick a Corn to see its Info.
+                    Double Click on the Map or Pick a Corn.
                   </Typography>
                   <CardMedia className={classes.media} image={selatkoImg} title="Selatko" />
                 </Card>
@@ -234,7 +234,7 @@ export default function Profile({ match }) {
                     offsetTop={-20}
                   >
                     <div
-                      onClick={() => setShowInfo(entry)}
+                      onClick={() => { setShowInfo({}); setShowInfo(entry); }}
                     >
                       <SvgIcon
                         xmlns="http://www.w3.org/2000/svg"
