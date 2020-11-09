@@ -22,4 +22,22 @@ const create = async (req, res) => {
   }
 };
 
-export default create;
+// eslint-disable-next-line consistent-return
+const remove = async (req, res) => {
+  try {
+    const user = req.profile;
+    await user.mapEntries.pull(req.params.entryId);
+    const UserWithDeletedEntry = await user.save();
+    UserWithDeletedEntry.hashed_password = undefined;
+    UserWithDeletedEntry.salt = undefined;
+    res.json(UserWithDeletedEntry);
+  } catch (err) {
+    return res.status(400).json({
+      error: errorHandler.getErrorMessage(err),
+    });
+  }
+};
+
+export default {
+  create, remove,
+};

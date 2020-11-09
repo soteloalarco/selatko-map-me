@@ -16,4 +16,22 @@ const create = async (mapEntry) => {
   }
 };
 
-export default create;
+const remove = async (params, credentials) => {
+  try {
+    const response = await fetch(`/api/entries/${params.userId}/${params.entryId}`, {
+      method: 'DELETE',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${credentials.t}`,
+      },
+    });
+    return await response.json();
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export {
+  create, remove,
+};

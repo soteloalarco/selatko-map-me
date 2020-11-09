@@ -28,6 +28,7 @@ import ReactMapGL, { Marker, Popup } from 'react-map-gl';
 import DeleteUser from './DeleteUser';
 import auth from '../auth/auth-helper';
 import { read } from './api-user';
+import DeleteEntry from '../map/DeleteEntry';
 import MapEntryForm from '../map/MapEntryForm';
 import selatkoImg from '../assets/images/pluto-109.png';
 
@@ -54,12 +55,12 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.openTitle,
   },
   profilepaper: {
-    minWidth: 350,
+    minWidth: 300,
     margin: 'auto',
     backgroundColor: '#EEDA9A',
   },
   visitpaper: {
-    minWidth: 350,
+    minWidth: 400,
     margin: 'auto',
   },
   profileitem: {
@@ -167,11 +168,23 @@ export default function Profile({ match }) {
                   <Typography variant="h6" className={classes.title}>
                     Visit Info :
                   </Typography>
-                  <Divider />
                   <List dense>
                     <ListItem>
-                      <ListItemText primary={`Title: ${showInfo.title}`} />
+                      <ListItemText primary={showInfo.title} />
+                      { auth.isAuthenticated().user && auth.isAuthenticated().user._id === user._id
+    && (
+    <ListItemSecondaryAction>
+      <DeleteEntry
+        userId={user._id}
+        entryId={showInfo._id}
+        onClose={() => {
+          setShowInfo({}); getUser();
+        }}
+      />
+    </ListItemSecondaryAction>
+    )}
                     </ListItem>
+                    <Divider />
                     <ListItem>
                       <ListItemText primary={`Description: ${showInfo.description}`} />
                     </ListItem>
@@ -310,6 +323,23 @@ export default function Profile({ match }) {
           </>
         ) : null
       }
+            {!(showInfo.image === undefined)
+              ? (
+                <Popup
+                  latitude={showInfo.latitude}
+                  longitude={showInfo.longitude}
+                  closeButton
+                  closeOnClick={false}
+                  dynamicPosition
+                  sortByDepth
+                  onClose={() => setShowInfo({})}
+                  anchor="top"
+                >
+                  <div className="popup">
+                    <img src={showInfo.image} alt={showInfo.title} />
+                  </div>
+                </Popup>
+              ) : null }
           </ReactMapGL>
           <CardContent>
             <Typography variant="body2" component="p">

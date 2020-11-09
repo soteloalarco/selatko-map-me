@@ -17,12 +17,12 @@ code {
 }
 
 .popup {
-  width: 18vw;
+  width: 19vw;
   padding: 1rem;
 }
 
 .popup img{
-  height: 180px;
+  height: 150px;
   width: auto;
   max-width: 20vw;
 }
